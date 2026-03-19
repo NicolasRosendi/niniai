@@ -5,19 +5,19 @@ services:
   - type: web
     name: digital-sentience-server
     runtime: python
-    plan: free          # 512MB RAM, 0.1 CPU, duerme después de 15min sin uso
-    region: oregon      # Más cercano a Sudamérica que Frankfurt
+    plan: free
+    region: oregon
+
+    # ✅ Forzar Python 3.11 — pydantic-core no compila en Python 3.14
+    pythonVersion: "3.11.9"
 
     buildCommand: |
-      pip install --upgrade pip
+      pip install --upgrade pip setuptools wheel
       pip install -r requirements.txt
 
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
 
-    # Variables de entorno (las sensibles las ponés en el dashboard de Render)
     envVars:
-      - key: PYTHON_VERSION
-        value: "3.11.0"
       - key: MODEL_DIR
         value: /data/models
       - key: CHROMA_DIR
