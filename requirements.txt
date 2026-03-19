@@ -1,28 +1,30 @@
 # Digital Sentience Server - Dependencies
-# Optimizado para Render free tier (512MB RAM)
+# Testeado en Python 3.11 — NO usar con Python 3.12+
 
 # Web framework
 fastapi==0.111.0
 uvicorn[standard]==0.30.1
 
+# Pydantic — versión con wheel pre-compilado para Python 3.11
+pydantic==2.7.4
+pydantic-core==2.18.4
+
 # Modelo LLM local (TinyLlama via llama.cpp)
-# Nota: en Render se compila desde source, tarda ~5 min la primera vez
 llama-cpp-python==0.2.77
 
-# Base de datos vectorial (liviana, SQLite por debajo)
+# Base de datos vectorial
 chromadb==0.5.3
 
-# Embeddings semánticos (~90MB, rápido en CPU)
+# Embeddings semánticos (~90MB)
 sentence-transformers==3.0.1
 
 # Descargar modelos de HuggingFace
 huggingface-hub==0.23.4
 
 # Utilidades
-pydantic==2.7.4
-python-multipart==0.0.9   # para upload de archivos
-psutil==6.0.0              # métricas de RAM/CPU
+python-multipart==0.0.9
+psutil==6.0.0
 
 # Parsing de documentos
-pypdf==4.2.0               # PDFs
-python-docx==1.1.2         # .docx
+pypdf==4.2.0
+python-docx==1.1.2
