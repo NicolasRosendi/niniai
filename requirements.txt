@@ -1,30 +1,29 @@
 # Digital Sentience Server - Dependencies
-# Testeado en Python 3.11 — NO usar con Python 3.12+
+# Sin versiones pinneadas de pydantic — se resuelven como dependencia transitoria
 
 # Web framework
-fastapi==0.111.0
-uvicorn[standard]==0.30.1
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
 
-# Pydantic — versión con wheel pre-compilado para Python 3.11
-pydantic==2.7.4
-pydantic-core==2.18.4
+# NO incluir pydantic ni pydantic-core explícitamente
+# fastapi y chromadb los instalan en la versión correcta solos
 
-# Modelo LLM local (TinyLlama via llama.cpp)
+# Modelo LLM local
 llama-cpp-python==0.2.77
 
 # Base de datos vectorial
-chromadb==0.5.3
+chromadb>=0.5.0
 
-# Embeddings semánticos (~90MB)
-sentence-transformers==3.0.1
+# Embeddings
+sentence-transformers>=2.7.0
 
-# Descargar modelos de HuggingFace
-huggingface-hub==0.23.4
+# HuggingFace
+huggingface-hub>=0.23.0
 
 # Utilidades
-python-multipart==0.0.9
-psutil==6.0.0
+python-multipart>=0.0.9
+psutil>=5.9.0
 
 # Parsing de documentos
-pypdf==4.2.0
-python-docx==1.1.2
+pypdf>=4.0.0
+python-docx>=1.1.0
