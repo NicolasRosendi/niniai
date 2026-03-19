@@ -1,0 +1,33 @@
+# render.yaml - Configuración de deploy en Render
+# Subí este archivo a la raíz del repo y Render lo detecta automáticamente
+
+services:
+  - type: web
+    name: digital-sentience-server
+    runtime: python
+    plan: free          # 512MB RAM, 0.1 CPU, duerme después de 15min sin uso
+    region: oregon      # Más cercano a Sudamérica que Frankfurt
+
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
+
+    # Variables de entorno (las sensibles las ponés en el dashboard de Render)
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.0"
+      - key: MODEL_DIR
+        value: /data/models
+      - key: CHROMA_DIR
+        value: /data/chroma
+      - key: PORT
+        value: "8000"
+
+    # Disco persistente: IMPORTANTE para que el modelo no se descargue en cada deploy
+    # Cuesta $1/mes en Render (500MB de disco). Sin esto, cada restart descarga el modelo.
+    disk:
+      name: sentience-data
+      mountPath: /data
+      sizeGB: 1
